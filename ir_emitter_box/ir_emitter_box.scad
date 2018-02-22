@@ -63,4 +63,29 @@ translate([200,0,0]){
         
     }
 }
+
+// neu von Papa
+
+translate([350,0,0]){
+    difference(){
+        difference(){
+            cylinder(10,50,10);
+        }
+        cylinder(10,5,5);
+        
+        translate([-40,0,0]){
+            cylinder(10,5,5);
+        }
+        translate([40,0,0]){
+            cylinder(10,5,5);
+        }
+        translate([0,-40,0]){
+            cylinder(10,5,5);
+        }
+        translate([0,40,0]){
+            cylinder(10,5,5);
+        }
+    }
+}
+
     
