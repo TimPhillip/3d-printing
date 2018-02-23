@@ -1,3 +1,5 @@
+zahnradabstand = 37.8;
+
 module 9g_motor(){
 	difference(){			
 		union(){
@@ -60,13 +62,27 @@ module wand(hoehe, anzahl, abstand) {
     translate ([hoehe-5,10,0])
     balken(anzahl*abstand);
 }
+
+module halterung() {
+    cube([5,22,36],false);
+    cube([13,20,14.5],false);
+    translate ([0,17,0])
+    cube([45,5,14.5],false);
+    translate ([0,0,0])
+    cube([45,3,14.5],false);
+    translate ([38,0,0])
+    cube([7,20,14.5],false);
+}
 union() {
     translate ([0,0,0])
-    wand(45,2,51);
+    wand(45,2,zahnradabstand);
     translate ([0,0,3])
-    boden(122,30);
+    boden(zahnradabstand*2+20,30);
     translate ([0,0,33])
-    wand(45,2,51);
+    wand(45,2,zahnradabstand);
+    translate ([0,zahnradabstand*2+20,0])
+    halterung();
 }
-translate ([25,130,11])
-9g_motor();
+//translate ([25,130,11])
+//9g_motor();
+
