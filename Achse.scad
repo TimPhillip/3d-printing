@@ -3,8 +3,8 @@ $fn = 40;
 
 // Maße der Mittelachse
 mittelAchseLaenge       = 30;
-mittelAchseRadius       = 6;
-mittelAchseZapfenBreite = 5;
+mittelAchseRadius       = 4;
+mittelAchseZapfenBreite = 3;
 mittelAchseZapfenLaenge = 3;
 mittelAchseRadBreite    = 5;
 
