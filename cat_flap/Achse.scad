@@ -2,9 +2,9 @@ include <ModuleKatzenklappe.scad>;
 $fn = 40;
 
 // Maße der Mittelachse
-mittelAchseLaenge       = 30;
+mittelAchseLaenge       = 21;
 mittelAchseRadius       = 4;
-mittelAchseZapfenBreite = 3;
+mittelAchseZapfenBreite = 2.5;
 mittelAchseZapfenLaenge = 3;
 mittelAchseRadBreite    = 5;
 

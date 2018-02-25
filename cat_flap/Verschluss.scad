@@ -4,45 +4,54 @@ include <ModuleKatzenklappe.scad>;
 
 // Maße eines L-Arms
 lArmBreite  = 10;
-lArmLaenge  = 80;
+lArmLaenge  = 18;
 lArmDicke   = 3;
 
 // Maße der Mittelachse
-mittelAchseLaenge       = 30;
-mittelAchseRadius       = 5;
-mittelAchseZapfenBreite = 3;
+mittelAchseLaenge       = 21;
+mittelAchseRadius       = 4;
+mittelAchseZapfenBreite = 2.5;
 mittelAchseZapfenLaenge = 3;
-mittelAchseRadBreite    = 15;
+mittelAchseRadBreite    = 5;
 
 union() {
 
-// Verschlussriegel unten
-lArm(laenge=lArmLaenge,breite=lArmBreite,dicke=lArmDicke);
+        // Verschlussriegel unten
+        lArm(laenge=lArmLaenge,breite=lArmBreite,dicke=lArmDicke);
 
-// Mittelachse
-mittelAchse(laenge = mittelAchseLaenge, radius_achse = mittelAchseRadius, zapfen_breite = mittelAchseZapfenBreite, zapfen_laenge = mittelAchseZapfenLaenge, breite = mittelAchseRadBreite);
+        translate([0,0,lArmDicke/2])
+        // Mittelachse
+        mittelAchse(laenge = mittelAchseLaenge, radius_achse = mittelAchseRadius, zapfen_breite = mittelAchseZapfenBreite, zapfen_laenge = mittelAchseZapfenLaenge, breite = mittelAchseRadBreite);
 
-// Antrieb in der Mittel
-translate([0,0,(mittelAchseLaenge / 2) - (mittelAchseRadius / 2) - (mittelAchseRadBreite / 4)]) rotate(45) mittelRad(mittelAchseRadBreite);
-    
-// Verschlussriegel oben
-translate ([0,0,mittelAchseLaenge])
-rotate(-90) lArm(laenge=lArmLaenge,breite=lArmBreite,dicke=lArmDicke);
+        // Antrieb in der Mitte
+        translate([0,0,(mittelAchseLaenge / 2)]) 
+        rotate(45) mittelRad(mittelAchseRadBreite);
+            
+        // Verschlussriegel oben
+        translate ([0,0,mittelAchseLaenge++lArmDicke/2])
+        rotate(-90) lArm(laenge=lArmLaenge,breite=lArmBreite,dicke=lArmDicke);
 }
 
-translate ([200,0,0])
+// Arm links
+translate ([100,0,0])
 lArm(laenge=lArmLaenge,breite=lArmBreite,dicke=lArmDicke);
 
-translate ([200,-50,0])
+// Arm rechts
+translate ([100,-50,0])
 rotate(-90) lArm(laenge=lArmLaenge,breite=lArmBreite,dicke=lArmDicke);
 
-translate ([-200,0,0])
+// Achse
+translate ([-100,0,mittelAchseRadius])
 rotate([0,90,0])
 rotate([0,0,30])
 mittelAchse(laenge = mittelAchseLaenge, radius_achse = mittelAchseRadius, zapfen_breite = mittelAchseZapfenBreite, zapfen_laenge = mittelAchseZapfenLaenge, breite = mittelAchseRadBreite);
 
-translate([-100,100,0])
-mittelRad(mittelAchseRadBreite);
+
+
+
+// Mittelrad
+//translate([0,100,0])
+//mittelRad(mittelAchseRadBreite);
 
 /*
 translate ([-200,200,0])
