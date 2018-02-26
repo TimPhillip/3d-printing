@@ -105,27 +105,27 @@ module vollBox() {
 
 module hohlBox() {
     // Boxaushöhlung
-    translate([0,frontWandstaerke*2])
+    translate([1.5,frontWandstaerke*2])
     cube([frontboxHoehe-frontWandstaerke*3,frontBreite-frontWandstaerke*4,frontDicke-frontWandstaerke]);
     
     // Schlitz Durchbruch links
     translate([-frontWandstaerke,frontWandstaerke+1,5])
-    cube([frontWandstaerke,frontRahmen-frontWandstaerke*3,frontDicke-frontWandstaerke-10]);
+    cube([frontWandstaerke*2,frontRahmen-frontWandstaerke*3,frontDicke-frontWandstaerke-10]);
 
     // Schlitz Durchbruch rechts
     translate([-frontWandstaerke,frontWandstaerke+flapBreite+frontRahmen+1,5])
-    cube([frontWandstaerke,frontRahmen-frontWandstaerke*3,frontDicke-frontWandstaerke-10]);
+    cube([frontWandstaerke*2,frontRahmen-frontWandstaerke*3,frontDicke-frontWandstaerke-10]);
 
     // Schlitz für Verschluss vorne
     translate([-frontWandstaerke,frontWandstaerke+flapBreite-25,28])
-    cube([frontWandstaerke,frontRahmen+10,4]);
+    cube([frontWandstaerke*2,frontRahmen+10,4]);
 
     // Schlitz für Verschluss hinten
     translate([-frontWandstaerke,frontWandstaerke+flapBreite-35,4])
-    cube([frontWandstaerke,frontRahmen+10,4]);
+    cube([frontWandstaerke*2,frontRahmen+10,4]);
 }
 
-module front() {
+module frontOben() {
     difference() {
         
         // Front-Oben
@@ -134,8 +134,10 @@ module front() {
         hohlFront();
     }
     
+}
+
+module frontUnten() {
     // Front-Unten (GearBox)
-    translate([frontHoehe-frontboxHoehe,0,0])
     difference() {
         vollBox();
         translate([frontWandstaerke,0,0])
@@ -143,21 +145,38 @@ module front() {
     } 
 }
 
+
 difference() {
     
-    // gesamte Front 2-teilig oben/unten
-    front();
+    // Frontoben
+    frontOben();
     
     // Klappe vergrößert ausschneiden
-    translate([frontRahmen+1.5,frontRahmen-1.5,0])
-    scale([1.00,1.02,1.0])flapCore(flapBreite,flapHoehe,frontDicke);
+    translate([frontRahmen,frontRahmen-1.5,0])
+    scale([1.02,1.02,1.0])flapCore(flapBreite,flapHoehe,frontDicke);
     
     // Klappe Original ausschneiden (wg. Aufhängung)
-    translate([frontRahmen+1,frontRahmen,frontDicke/2-flapStaerke/2])
+    translate([frontRahmen,frontRahmen-1.5,frontDicke/2-flapStaerke/2])
     flap(flapBreite,flapHoehe,flapStaerke);
 
 }
 
+/**/
+
+translate([0,0,0])
+difference() {
+    
+    // Front unten
+    translate([frontHoehe-frontboxHoehe,0,0])
+    frontUnten();
+    
+    // Klappe vergrößert ausschneiden
+    translate([frontRahmen-frontWandstaerke+1.5,frontRahmen-1.5,0])
+    scale([1.02,1.01,1.0])flapCore(flapBreite,flapHoehe,frontDicke);
+    
+//  halbiert die Form
+//    cube([frontHoehe,frontBreite/2,frontDicke]);
+}
 
 
 
