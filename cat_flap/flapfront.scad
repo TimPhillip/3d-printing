@@ -145,7 +145,7 @@ module frontUnten() {
     } 
 }
 
-
+/*
 difference() {
     
     // Frontoben
@@ -161,7 +161,7 @@ difference() {
 
 }
 
-/**/
+*/
 
 translate([0,0,0])
 difference() {
@@ -175,11 +175,12 @@ difference() {
     scale([1.02,1.01,1.0])flapCore(flapBreite,flapHoehe,frontDicke);
     
 //  halbiert die Form
-//    cube([frontHoehe,frontBreite/2,frontDicke]);
+    translate([0,frontBreite/2,0])
+    cube([frontHoehe,frontBreite/2,frontDicke]);
 }
 
 
-
+/*
 // Flap in Front einpassen
 translate([frontRahmen+1,frontRahmen,frontDicke/2-flapStaerke/2])
 difference(){
@@ -189,4 +190,4 @@ difference(){
     translate([flapFrame/2,flapFrame/2,flapStaerke-flapHub])
     flapCore(flapBreite-flapFrame,flapHoehe-flapFrame,flapHub);
 }
-/**/
+*/
