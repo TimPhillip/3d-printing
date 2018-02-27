@@ -82,13 +82,17 @@ module mittelAchse(laenge, radius_achse, zapfen_breite, zapfen_laenge, breite) {
     }
 };
 
-module achse(laenge, radius_achse) {
-    difference() {
-        cylinder(laenge,r = radius_achse, false, $fn=6);
-        cylinder (laenge+6,r=0.9, false);
+module achse(laenge_achse,laenge_stift, radius_stift, radius_achse) {
+    union(){
+        cylinder(laenge_achse,r = radius_achse, false, $fn=6);
+        translate([0,0,-laenge_stift])
+        cylinder(laenge_stift,r = radius_stift, false);
+        translate([0,0,laenge_achse])
+        cylinder(laenge_stift,r = radius_stift, false);
     }
 };
 
+//stuetzeTop(18);
 
 module tooth(width, thickness, height){
   scale([width/5,thickness/5,height/10]){
@@ -140,23 +144,6 @@ module letter(l) {
 }
 
 
-module 9g_motor(){
-	difference(){			
-		union(){
-			color("SteelBlue") cube([23,12.5,22], center=true);
-			color("SteelBlue") translate([0,0,5]) cube([32,12,2], center=true);
-			color("SteelBlue") translate([5.5,0,2.75]) cylinder(r=6, h=25.75, $fn=20, center=true);
-			color("SteelBlue") translate([-.5,0,2.75]) cylinder(r=1, h=25.75, $fn=20, center=true);
-			color("SteelBlue") translate([-1,0,2.75]) cube([5,5.6,24.5], center=true);		
-			color("white") translate([5.5,0,3.65]) cylinder(r=2.35, h=29.25, $fn=20, center=true);				
-		}
-		translate([10,0,-11]) rotate([0,-30,0]) cube([8,13,4], center=true);
-		for ( hole = [14,-14] ){
-			translate([hole,0,5]) cylinder(r=2.2, h=4, $fn=20, center=true);
-		}	
-	}
-}
-
 module sg90() {
 	color("blue") difference() {
 		union() {
@@ -197,7 +184,33 @@ module stuetze (hoehe) {
         cube([hoehe,20,3], false);
         translate ([hoehe,10,0])
         cylinder(21,r=3, center=true);
+
+        translate ([hoehe,5,1.5])
+        rotate([90,0,90])
+        cylinder(5,r=1, center=true);
+
+        translate ([hoehe,15,1.5])
+        rotate([90,0,90])
+        cylinder(5,r=1, center=true);
     }
+}
+
+module stuetzeTop (hoehe) {
+    difference() {
+        translate ([0,0,0])
+        cube([hoehe,20,3], false);
+        translate ([0,10,0])
+        cylinder(21,r=3, center=true);
+        translate ([hoehe,5,1.5])
+        rotate([90,0,90])
+        cylinder(55,r=1, center=true);
+
+        translate ([hoehe,15,1.5])
+        rotate([90,0,90])
+        cylinder(55,r=1, center=true);
+    } 
+
+
 }
 
 module balken (laenge) {
@@ -206,7 +219,7 @@ module balken (laenge) {
         cube([5,laenge,3], false);
     }
 /*    translate ([2.5,25,2.5])
-        rotate(-90,90,0)
+        rotate([-90,90,0])
         letter("Design by Achim & Tim 2018");    
 */
 }
@@ -241,10 +254,45 @@ module halterung(hoehe) {
     cube([Bodendicke,22,36],false);
     difference(){
         // Motorhalterung
+        translate ([0,0,1.5])
         cube([hoehe,22,15.5],false);
-        translate ([hoehe-5,10,11])
+        translate ([8,10,11])
         cylinder(6,r=0.5, center=false);
-        translate ([10,10,11])
+
+        translate ([hoehe,1.5,5])
+        rotate([90,0,90])
+        cylinder(5,r=1, center=true);
+        translate ([hoehe,1.5,15])
+        rotate([90,0,90])
+        cylinder(5,r=1, center=true);
+        translate ([hoehe,20,5])
+        rotate([90,0,90])
+        cylinder(5,r=1, center=true);
+        translate ([hoehe,20,15])
+        rotate([90,0,90])
+        cylinder(5,r=1, center=true);
+   }
+}
+
+module halterungOben(hoehe) {
+    difference(){
+        // Motorhalterung
+        translate ([0,0,1.5])
+        cube([hoehe,22,15.5],false);
+        translate ([7.0,10,11])
         cylinder(6,r=0.5, center=false);
-    }
+
+        translate ([hoehe,1.5,5])
+        rotate([90,0,90])
+        cylinder(55,r=1, center=true);
+        translate ([hoehe,1.5,15])
+        rotate([90,0,90])
+        cylinder(55,r=1, center=true);
+        translate ([hoehe,20,5])
+        rotate([90,0,90])
+        cylinder(55,r=1, center=true);
+        translate ([hoehe,20,15])
+        rotate([90,0,90])
+        cylinder(55,r=1, center=true);
+   }
 }

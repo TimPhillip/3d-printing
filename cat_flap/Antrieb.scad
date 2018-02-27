@@ -12,6 +12,8 @@ module gearBoxUnten() {
         // Stützen vorne
         translate ([0,0*zahnradabstand,0])
         stuetze(gehaeusehoehe);
+        translate ([gehaeusehoehe,0*zahnradabstand,0])
+        stuetzeTop(10);
         translate ([0,1*zahnradabstand,10])
         stuetze(gehaeusehoehe-stufe);
         translate ([0,2*zahnradabstand,0])
@@ -34,9 +36,40 @@ module gearBoxUnten() {
         difference() {
             translate ([0,zahnradabstand*2+20,0])
             halterung(gehaeusehoehe);
-            translate ([23,80,0])
+            translate ([23,80,1])
             scale(1.01) sg90();
         }
+    }
+}
+
+module gearBoxOben() {
+    hoeheOben = 9;
+    union() {
+
+        // Stützen vorne
+        translate ([gehaeusehoehe,0*zahnradabstand,0])
+        stuetzeTop(hoeheOben);
+        translate ([gehaeusehoehe-stufe,1*zahnradabstand,10])
+        stuetzeTop(hoeheOben+stufe);
+        translate ([gehaeusehoehe,2*zahnradabstand,0])
+        stuetzeTop(hoeheOben);
+
+        // Stützen hinten
+        translate ([gehaeusehoehe,0*zahnradabstand,33])
+        stuetzeTop(hoeheOben);
+        translate ([gehaeusehoehe-stufe,1*zahnradabstand,20])
+        stuetzeTop(hoeheOben+stufe);
+        translate ([gehaeusehoehe,2*zahnradabstand,33])
+        stuetzeTop(hoeheOben);
+
+        // Motorhalterung
+        difference() {
+            translate ([gehaeusehoehe,zahnradabstand*2+20,0])
+            halterungOben(hoeheOben);
+            translate ([23,80,1])
+            scale(1.01) sg90();
+        }
+
     }
 }
 
@@ -55,9 +88,9 @@ module zahnraeder() {
                     gear_thickness=2,
                     hub_thickness=3,
                     circles=0);
-        // Servo
-               translate ([25,80,0])
-               scale(1.01) sg90();
+        // Servo ausschneiden
+        translate ([23,80,0])
+        scale(1.01) sg90();
     }
     // Zahnrad 1.1
     translate ([gehaeusehoehe,60,28])
@@ -86,7 +119,7 @@ module zahnraeder() {
                 circles=0);
 
     translate ([gehaeusehoehe,60,4])
-    achse(laenge=25, radius_achse=mittelAchseRadius);
+    achse(laenge_achse=28,laenge_stift=4.0, radius_stift=2.75, radius_achse=mittelAchseRadius);
 
 
     // Zahnrad 2
@@ -102,8 +135,8 @@ module zahnraeder() {
                 hub_thickness=4,
                 circles=0);
 
-    translate ([gehaeusehoehe-stufe,35,10])
-    achse(laenge=13, radius_achse=mittelAchseRadius);
+    translate ([gehaeusehoehe-stufe,35,14.0])
+    achse(laenge_achse=5,laenge_stift=4.0, radius_stift=2.75, radius_achse=mittelAchseRadius);
 
     // Zahnrad 3
     translate ([gehaeusehoehe,10,14])
@@ -121,7 +154,7 @@ module zahnraeder() {
 
     // Maße eines L-Arms
     lArmBreite  = 10;
-    lArmLaenge  = 26;
+    lArmLaenge  = 21;
     lArmDicke   = 3;
 
     // Maße der Mittelachse
@@ -133,6 +166,7 @@ module zahnraeder() {
 
     // Verschluss
     translate([gehaeusehoehe,10,4.5])
+    rotate([0,0,90])
     union() {
 
             // Verschlussriegel unten
@@ -140,21 +174,24 @@ module zahnraeder() {
 
             translate([0,0,0])
             // Mittelachse
-            mittelAchse(laenge = mittelAchseLaenge, radius_achse = mittelAchseRadius, zapfen_breite = mittelAchseZapfenBreite, zapfen_laenge = mittelAchseZapfenLaenge, breite = mittelAchseRadBreite);
-                
+/*            mittelAchse(laenge = mittelAchseLaenge, radius_achse = mittelAchseRadius, zapfen_breite = mittelAchseZapfenBreite, zapfen_laenge = mittelAchseZapfenLaenge, breite = mittelAchseRadBreite);
+*/                
+    achse(laenge_achse=28,laenge_stift=4.0, radius_stift=2.75, radius_achse=mittelAchseRadius);
+
             // Verschlussriegel oben
             translate ([0,0,mittelAchseLaenge+lArmDicke])
             rotate(-90) lArm(laenge=lArmLaenge,breite=lArmBreite,dicke=lArmDicke);
     }
 
-// Servo
-//translate ([25,80,0])
-//scale(1.01) sg90();
+// Servo anzeigen
+translate ([23,80,1])
+scale(1.01) sg90();
 
 }
 
 rotate([0,-90,0])
 union () {
     gearBoxUnten();
+    gearBoxOben();
     zahnraeder();
 }
