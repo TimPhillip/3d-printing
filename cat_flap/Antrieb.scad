@@ -88,8 +88,8 @@ module zahnraeder() {
         // Zahnrad 0
         translate ([28.5,80,28])
         //rotate([0,0,1/84*360])
-        gear (number_of_teeth=37,
-                    circular_pitch=109.8,
+        gear (number_of_teeth=27,
+                    circular_pitch=150.0,
                     hub_diameter=7,
                     bore_diameter=1.8,
                     rim_width=2,
@@ -104,8 +104,8 @@ module zahnraeder() {
     // Zahnrad 1.1
     translate ([gehaeusehoehe,60,28])
     rotate([0,0,1/30*360])
-    gear (number_of_teeth=30,
-                circular_pitch=109.8,
+    gear (number_of_teeth=22,
+                circular_pitch=150.0,
                 hub_diameter=7,
                 bore_diameter=1.8,
                 rim_width=2,
@@ -117,8 +117,8 @@ module zahnraeder() {
     // Zahnrad 1.2
     translate ([gehaeusehoehe,60,14])
     // rotate([0,0,1/30*360])
-    gear (number_of_teeth=30,
-                circular_pitch=109.8,
+    gear (number_of_teeth=22,
+                circular_pitch=150.0,
                 hub_diameter=7,
                 bore_diameter=1.8,
                 rim_width=2,
@@ -134,8 +134,8 @@ module zahnraeder() {
     // Zahnrad 2
     translate ([gehaeusehoehe-stufe,35,14])
     //rotate([0,0,1/108*360])
-    gear (number_of_teeth=54,
-                circular_pitch=109.8,
+    gear (number_of_teeth=42,
+                circular_pitch=150.0,
                 hub_diameter=7,
                 bore_diameter=1.8,
                 rim_width=2,
@@ -150,8 +150,8 @@ module zahnraeder() {
     // Zahnrad 3
     translate ([gehaeusehoehe,10,14])
     rotate([0,0,1/56*360])
-    gear (number_of_teeth=32,
-                circular_pitch=109.8,
+    gear (number_of_teeth=22,
+                circular_pitch=150.0,
                 hub_diameter=7,
                 bore_diameter=1.8,
                 rim_width=2,
@@ -202,5 +202,5 @@ rotate([0,-90,0])
 union () {
 //    gearBoxUnten();
     gearBoxOben();
-//    zahnraeder();
+    zahnraeder();
 }
