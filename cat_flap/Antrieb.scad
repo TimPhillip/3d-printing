@@ -12,8 +12,6 @@ module gearBoxUnten() {
         // Stützen vorne
         translate ([0,0*zahnradabstand,0])
         stuetze(gehaeusehoehe);
-        translate ([gehaeusehoehe,0*zahnradabstand,0])
-        stuetzeTop(10);
         translate ([0,1*zahnradabstand,10])
         stuetze(gehaeusehoehe-stufe);
         translate ([0,2*zahnradabstand,0])
@@ -46,6 +44,17 @@ module gearBoxOben() {
     hoeheOben = 9;
     union() {
 
+        // Deckel
+        translate ([39,20,0])
+        rotate([0,0,90])
+        cube([30,2,3]);
+        translate ([39,20,33])
+        rotate([0,0,90])
+        cube([30,2,3]);
+        translate ([39,42,3])
+        rotate([0,0,90])
+        cube([3,2,30]);
+
         // Stützen vorne
         translate ([gehaeusehoehe,0*zahnradabstand,0])
         stuetzeTop(hoeheOben);
@@ -66,7 +75,7 @@ module gearBoxOben() {
         difference() {
             translate ([gehaeusehoehe,zahnradabstand*2+20,0])
             halterungOben(hoeheOben);
-            translate ([23,80,1])
+            translate ([24.5,80,1])
             scale(1.01) sg90();
         }
 
@@ -141,7 +150,7 @@ module zahnraeder() {
     // Zahnrad 3
     translate ([gehaeusehoehe,10,14])
     rotate([0,0,1/56*360])
-    gear (number_of_teeth=28,
+    gear (number_of_teeth=32,
                 circular_pitch=109.8,
                 hub_diameter=7,
                 bore_diameter=1.8,
@@ -191,7 +200,7 @@ scale(1.01) sg90();
 
 rotate([0,-90,0])
 union () {
-    gearBoxUnten();
+//    gearBoxUnten();
     gearBoxOben();
-    zahnraeder();
+//    zahnraeder();
 }
