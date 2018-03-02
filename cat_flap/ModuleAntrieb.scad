@@ -96,9 +96,13 @@ module achse(laenge_achse,laenge_stift, radius_stift, radius_achse) {
 
 /* Testdruck
 stuetzeTop(18);
+<<<<<<< HEAD
 */
+=======
+>>>>>>> 36c864e237b3c13e2192af6ccb1aeadd90f8b5f0
     mittelAchseRadius       = 4;
 difference() {
+<<<<<<< HEAD
 
 
     // Maße eines L-Arms
@@ -117,23 +121,40 @@ difference() {
     // Verschlussriegel unten
     lArm(laenge=lArmLaenge,breite=lArmBreite,dicke=lArmDicke);
 
+=======
+    gear (number_of_teeth=32,
+                circular_pitch=109.8,
+                hub_diameter=7,
+                bore_diameter=1.8,
+                rim_width=2,
+                rim_thickness=4,
+                gear_thickness=4,
+                hub_thickness=4,
+                circles=0);
+>>>>>>> 36c864e237b3c13e2192af6ccb1aeadd90f8b5f0
     translate([0,0,-10])
     achse(laenge_achse=28,laenge_stift=4.0, radius_stift=2.75, radius_achse=mittelAchseRadius+0.25);
 
 }
+<<<<<<< HEAD
 
 
+=======
+*/
 >>>>>>> 36c864e237b3c13e2192af6ccb1aeadd90f8b5f0
 
 font = "Liberation Sans";
 
 
+letter_size = 3;
+letter_height = 1;
 
 
 module letter(l) {
   // Use linear_extrude() to make the letters 3D objects as they
   // are only 2D shapes when only using text()
   linear_extrude(height = letter_height) {
+    text(l, size = letter_size, font = font, halign = "left", valign = "center", $fn = 16);
   }
 }
 
@@ -177,12 +198,15 @@ module stuetze (hoehe) {
         translate ([0,0,0])
         cube([hoehe,20,3], false);
         translate ([hoehe,10,0])
+        cylinder(21,r=3.5, center=true);
 
         translate ([hoehe,5,1.5])
         rotate([90,0,90])
+        cylinder(85,r=1, center=true);
 
         translate ([hoehe,15,1.5])
         rotate([90,0,90])
+        cylinder(85,r=1, center=true);
     }
 }
 
@@ -191,6 +215,7 @@ module stuetzeTop (hoehe) {
         translate ([0,0,0])
         cube([hoehe,20,3], false);
         translate ([0,10,0])
+        cylinder(21,r=3.5, center=true);
         translate ([hoehe,5,1.5])
         rotate([90,0,90])
         cylinder(55,r=1, center=true);
@@ -216,6 +241,7 @@ module balken (laenge) {
 
 module boden(laenge, breite) {
     difference() {
+        Bodendicke = 2;
         cube([Bodendicke,laenge,breite], false);
 
         // Löcher in Bodenplatte
@@ -228,7 +254,17 @@ module boden(laenge, breite) {
         rotate([0,90,0])
         translate ([-breite/2,laenge*0.9,0])
         cylinder(Bodendicke+1,r=1.5, center=false);
+        
+        // Schlitz in der Bodenplatte
+        translate ([1,breite/2+10,11.5])
+        cube([1,20,8], false);
+        
+        rotate([0,90,0])
+        rotate([0,0,90])
+        translate ([10,25,1.5])
+        letter("Design Achim & Tim 2018");
     }
+    
 }
 
 module wand(hoehe, anzahl, abstand) {
@@ -239,19 +275,29 @@ module wand(hoehe, anzahl, abstand) {
 
 module halterung(hoehe) {
     // Bodenplatte
+    Bodendicke = 2;
     cube([Bodendicke,22,36],false);
     difference(){
         // Motorhalterung
         translate ([0,0,1.5])
         cube([hoehe,22,15.5],false);
+        translate ([0,0,1.5])
+        cube([hoehe,1,15.5],false);
         translate ([8,10,11])
         cylinder(6,r=0.5, center=false);
+        // Löcher
+        translate ([hoehe,2.25,5])
         rotate([90,0,90])
+        cylinder(85,r=1, center=true);
+        translate ([hoehe,2.25,15])
         rotate([90,0,90])
+        cylinder(85,r=1, center=true);
         translate ([hoehe,20,5])
         rotate([90,0,90])
+        cylinder(85,r=1, center=true);
         translate ([hoehe,20,15])
         rotate([90,0,90])
+        cylinder(85,r=1, center=true);
    }
 }
 
@@ -260,10 +306,15 @@ module halterungOben(hoehe) {
         // Motorhalterung
         translate ([0,0,1.5])
         cube([hoehe,22,15.5],false);
+        translate ([0,0,1.5])
+        cube([hoehe-3,1,15.5],false);
+       translate ([7.0,10,11])
         cylinder(6,r=0.5, center=false);
 
+        translate ([hoehe,2.25,5])
         rotate([90,0,90])
         cylinder(55,r=1, center=true);
+        translate ([hoehe,2.25,15])
         rotate([90,0,90])
         cylinder(55,r=1, center=true);
         translate ([hoehe,20,5])
