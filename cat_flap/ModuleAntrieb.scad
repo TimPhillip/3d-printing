@@ -96,13 +96,13 @@ module achse(laenge_achse,laenge_stift, radius_stift, radius_achse) {
 
 /* Testdruck
 stuetzeTop(18);
-<<<<<<< HEAD
-*/
-=======
->>>>>>> 36c864e237b3c13e2192af6ccb1aeadd90f8b5f0
+
+
+
     mittelAchseRadius       = 4;
+
 difference() {
-<<<<<<< HEAD
+
 
 
     // Maße eines L-Arms
@@ -121,7 +121,7 @@ difference() {
     // Verschlussriegel unten
     lArm(laenge=lArmLaenge,breite=lArmBreite,dicke=lArmDicke);
 
-=======
+
     gear (number_of_teeth=32,
                 circular_pitch=109.8,
                 hub_diameter=7,
@@ -131,17 +131,13 @@ difference() {
                 gear_thickness=4,
                 hub_thickness=4,
                 circles=0);
->>>>>>> 36c864e237b3c13e2192af6ccb1aeadd90f8b5f0
     translate([0,0,-10])
     achse(laenge_achse=28,laenge_stift=4.0, radius_stift=2.75, radius_achse=mittelAchseRadius+0.25);
 
 }
-<<<<<<< HEAD
 
-
-=======
 */
->>>>>>> 36c864e237b3c13e2192af6ccb1aeadd90f8b5f0
+
 
 font = "Liberation Sans";
 
