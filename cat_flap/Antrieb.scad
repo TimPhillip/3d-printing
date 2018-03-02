@@ -12,7 +12,6 @@ module gearBoxUnten() {
         // Stützen vorne
         translate ([0,0*zahnradabstand,0])
         stuetze(gehaeusehoehe);
-        translate ([0,1*zahnradabstand,10])
         stuetze(gehaeusehoehe-stufe);
         translate ([0,2*zahnradabstand,0])
         stuetze(gehaeusehoehe);
@@ -25,7 +24,6 @@ module gearBoxUnten() {
         // Stützen hinten
         translate ([0,0*zahnradabstand,33])
         stuetze(gehaeusehoehe);
-        translate ([0,1*zahnradabstand,20])
         stuetze(gehaeusehoehe-stufe);
         translate ([0,2*zahnradabstand,33])
         stuetze(gehaeusehoehe);
@@ -53,12 +51,10 @@ module gearBoxOben() {
         cube([30,2,3]);
         translate ([39,42,3])
         rotate([0,0,90])
-        cube([3,2,30]);
 
         // Stützen vorne
         translate ([gehaeusehoehe,0*zahnradabstand,0])
         stuetzeTop(hoeheOben);
-        translate ([gehaeusehoehe-stufe,1*zahnradabstand,10])
         stuetzeTop(hoeheOben+stufe);
         translate ([gehaeusehoehe,2*zahnradabstand,0])
         stuetzeTop(hoeheOben);
@@ -66,7 +62,6 @@ module gearBoxOben() {
         // Stützen hinten
         translate ([gehaeusehoehe,0*zahnradabstand,33])
         stuetzeTop(hoeheOben);
-        translate ([gehaeusehoehe-stufe,1*zahnradabstand,20])
         stuetzeTop(hoeheOben+stufe);
         translate ([gehaeusehoehe,2*zahnradabstand,33])
         stuetzeTop(hoeheOben);
@@ -115,7 +110,6 @@ module zahnraeder() {
                 circles=0);
 
     // Zahnrad 1.2
-    translate ([gehaeusehoehe,60,14])
     // rotate([0,0,1/30*360])
     gear (number_of_teeth=22,
                 circular_pitch=150.0,
@@ -132,7 +126,6 @@ module zahnraeder() {
 
 
     // Zahnrad 2
-    translate ([gehaeusehoehe-stufe,35,14])
     //rotate([0,0,1/108*360])
     gear (number_of_teeth=42,
                 circular_pitch=150.0,
@@ -144,11 +137,9 @@ module zahnraeder() {
                 hub_thickness=4,
                 circles=0);
 
-    translate ([gehaeusehoehe-stufe,35,14.0])
     achse(laenge_achse=5,laenge_stift=4.0, radius_stift=2.75, radius_achse=mittelAchseRadius);
 
     // Zahnrad 3
-    translate ([gehaeusehoehe,10,14])
     rotate([0,0,1/56*360])
     gear (number_of_teeth=22,
                 circular_pitch=150.0,
@@ -200,7 +191,6 @@ scale(1.01) sg90();
 
 rotate([0,-90,0])
 union () {
-//    gearBoxUnten();
     gearBoxOben();
     zahnraeder();
 }

@@ -95,11 +95,9 @@ module achse(laenge_achse,laenge_stift, radius_stift, radius_achse) {
 };
 
 /* Testdruck
-
 stuetzeTop(18);
 */
     mittelAchseRadius       = 4;
-
 difference() {
 
 
@@ -125,19 +123,17 @@ difference() {
 }
 
 
+>>>>>>> 36c864e237b3c13e2192af6ccb1aeadd90f8b5f0
 
 font = "Liberation Sans";
 
 
-letter_size = 5;
-letter_height = 3;
 
 
 module letter(l) {
   // Use linear_extrude() to make the letters 3D objects as they
   // are only 2D shapes when only using text()
   linear_extrude(height = letter_height) {
-    text(l, size = letter_size, font = font, halign = "center", valign = "center", $fn = 16);
   }
 }
 
@@ -181,15 +177,12 @@ module stuetze (hoehe) {
         translate ([0,0,0])
         cube([hoehe,20,3], false);
         translate ([hoehe,10,0])
-        cylinder(21,r=3, center=true);
 
         translate ([hoehe,5,1.5])
         rotate([90,0,90])
-        cylinder(5,r=1, center=true);
 
         translate ([hoehe,15,1.5])
         rotate([90,0,90])
-        cylinder(5,r=1, center=true);
     }
 }
 
@@ -198,7 +191,6 @@ module stuetzeTop (hoehe) {
         translate ([0,0,0])
         cube([hoehe,20,3], false);
         translate ([0,10,0])
-        cylinder(21,r=3, center=true);
         translate ([hoehe,5,1.5])
         rotate([90,0,90])
         cylinder(55,r=1, center=true);
@@ -224,7 +216,6 @@ module balken (laenge) {
 
 module boden(laenge, breite) {
     difference() {
-        Bodendicke = 3;
         cube([Bodendicke,laenge,breite], false);
 
         // Löcher in Bodenplatte
@@ -248,7 +239,6 @@ module wand(hoehe, anzahl, abstand) {
 
 module halterung(hoehe) {
     // Bodenplatte
-    Bodendicke = 3;
     cube([Bodendicke,22,36],false);
     difference(){
         // Motorhalterung
@@ -256,19 +246,12 @@ module halterung(hoehe) {
         cube([hoehe,22,15.5],false);
         translate ([8,10,11])
         cylinder(6,r=0.5, center=false);
-
-        translate ([hoehe,1.5,5])
         rotate([90,0,90])
-        cylinder(5,r=1, center=true);
-        translate ([hoehe,1.5,15])
         rotate([90,0,90])
-        cylinder(5,r=1, center=true);
         translate ([hoehe,20,5])
         rotate([90,0,90])
-        cylinder(5,r=1, center=true);
         translate ([hoehe,20,15])
         rotate([90,0,90])
-        cylinder(5,r=1, center=true);
    }
 }
 
@@ -277,13 +260,10 @@ module halterungOben(hoehe) {
         // Motorhalterung
         translate ([0,0,1.5])
         cube([hoehe,22,15.5],false);
-        translate ([7.0,10,11])
         cylinder(6,r=0.5, center=false);
 
-        translate ([hoehe,1.5,5])
         rotate([90,0,90])
         cylinder(55,r=1, center=true);
-        translate ([hoehe,1.5,15])
         rotate([90,0,90])
         cylinder(55,r=1, center=true);
         translate ([hoehe,20,5])
