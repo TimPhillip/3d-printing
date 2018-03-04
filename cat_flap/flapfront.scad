@@ -1,5 +1,5 @@
 include <flap.scad>;
-
+include <Antrieb.scad>
 
 
 // Flap Einstellungen
@@ -48,8 +48,8 @@ module vollFront() {
 
 module hohlFront() {
 
-    LEDradius       =   2.5;
-    Tasterradius    =   1.5;
+    LEDradius       =   3.9;
+    Tasterradius    =   3.5;
 
     // Seite oben
     translate([0,frontRahmen/2,0])
@@ -117,12 +117,12 @@ module hohlBox() {
     cube([frontWandstaerke*2,frontRahmen-frontWandstaerke*3,frontDicke-frontWandstaerke-10]);
 
     // Schlitz für Verschluss vorne
-    translate([-frontWandstaerke,frontWandstaerke+flapBreite-25,28])
-    cube([frontWandstaerke*2,frontRahmen+10,4]);
+    translate([-frontWandstaerke,flapBreite/2,28])
+    cube([frontWandstaerke*2,60,4]);
 
     // Schlitz für Verschluss hinten
-    translate([-frontWandstaerke,frontWandstaerke+flapBreite-35,4])
-    cube([frontWandstaerke*2,frontRahmen+10,4]);
+    translate([-frontWandstaerke,flapBreite/2,4])
+    cube([frontWandstaerke*2,60,4]);
 }
 
 module frontOben() {
@@ -145,7 +145,7 @@ module frontUnten() {
     } 
 }
 
-/*
+
 difference() {
     
     // Frontoben
@@ -160,7 +160,7 @@ difference() {
     flap(flapBreite,flapHoehe,flapStaerke);
 
 }
-
+/*
 */
 
 translate([0,0,0])
@@ -173,14 +173,15 @@ difference() {
     // Klappe vergrößert ausschneiden
     translate([frontRahmen-frontWandstaerke+1.5,frontRahmen-1.5,0])
     scale([1.02,1.01,1.0])flapCore(flapBreite,flapHoehe,frontDicke);
-    
+/*    
 //  halbiert die Form
     translate([0,frontBreite/2,0])
     cube([frontHoehe,frontBreite/2,frontDicke]);
+*/
 }
 
 
-/*
+
 // Flap in Front einpassen
 translate([frontRahmen+1,frontRahmen,frontDicke/2-flapStaerke/2])
 difference(){
@@ -190,4 +191,10 @@ difference(){
     translate([flapFrame/2,flapFrame/2,flapStaerke-flapHub])
     flapCore(flapBreite-flapFrame,flapHoehe-flapFrame,flapHub);
 }
-*/
+
+// Antrieb in Gehäuse einsetzen
+translate([flapHoehe+frontRahmen+frontboxHoehe-frontWandstaerke,110,0])
+rotate([0,90,0])
+rotate([0,90,0])
+rotate([180,0,0])
+gearBox();

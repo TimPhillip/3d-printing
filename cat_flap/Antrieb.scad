@@ -206,9 +206,11 @@ scale(1.01) sg90();
 
 }
 
-rotate([0,-90,0])
-union () {
-    gearBoxUnten();
-    gearBoxOben();
-    zahnraeder();
+module gearBox() {
+//    rotate([0,-90,0])
+    union () {
+        gearBoxUnten();
+        gearBoxOben();
+        zahnraeder();
+    }
 }

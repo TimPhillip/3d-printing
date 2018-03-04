@@ -143,7 +143,7 @@ font = "Liberation Sans";
 
 
 letter_size = 3;
-letter_height = 1;
+letter_height = 2;
 
 
 module letter(l) {
@@ -195,7 +195,7 @@ module stuetze (hoehe) {
         cube([hoehe,20,3], false);
         translate ([hoehe,10,0])
         cylinder(21,r=3.5, center=true);
-
+/*
         translate ([hoehe,5,1.5])
         rotate([90,0,90])
         cylinder(85,r=1, center=true);
@@ -203,6 +203,7 @@ module stuetze (hoehe) {
         translate ([hoehe,15,1.5])
         rotate([90,0,90])
         cylinder(85,r=1, center=true);
+*/
     }
 }
 
@@ -212,6 +213,7 @@ module stuetzeTop (hoehe) {
         cube([hoehe,20,3], false);
         translate ([0,10,0])
         cylinder(21,r=3.5, center=true);
+/*         
         translate ([hoehe,5,1.5])
         rotate([90,0,90])
         cylinder(55,r=1, center=true);
@@ -219,6 +221,7 @@ module stuetzeTop (hoehe) {
         translate ([hoehe,15,1.5])
         rotate([90,0,90])
         cylinder(55,r=1, center=true);
+*/
     } 
 
 
@@ -254,11 +257,12 @@ module boden(laenge, breite) {
         // Schlitz in der Bodenplatte
         translate ([1,breite/2+10,11.5])
         cube([1,20,8], false);
-        
+/*        
         rotate([0,90,0])
         rotate([0,0,90])
-        translate ([10,25,1.5])
+        translate ([10,25,0.5])
         letter("Design Achim & Tim 2018");
+*/
     }
     
 }
@@ -281,6 +285,7 @@ module halterung(hoehe) {
         cube([hoehe,1,15.5],false);
         translate ([8,10,11])
         cylinder(6,r=0.5, center=false);
+/*
         // Löcher
         translate ([hoehe,2.25,5])
         rotate([90,0,90])
@@ -294,6 +299,7 @@ module halterung(hoehe) {
         translate ([hoehe,20,15])
         rotate([90,0,90])
         cylinder(85,r=1, center=true);
+*/
    }
 }
 
@@ -304,9 +310,10 @@ module halterungOben(hoehe) {
         cube([hoehe,22,15.5],false);
         translate ([0,0,1.5])
         cube([hoehe-3,1,15.5],false);
-       translate ([7.0,10,11])
+        translate ([7.0,10,11])
         cylinder(6,r=0.5, center=false);
 
+/*
         translate ([hoehe,2.25,5])
         rotate([90,0,90])
         cylinder(55,r=1, center=true);
@@ -319,5 +326,6 @@ module halterungOben(hoehe) {
         translate ([hoehe,20,15])
         rotate([90,0,90])
         cylinder(55,r=1, center=true);
+*/
    }
 }
