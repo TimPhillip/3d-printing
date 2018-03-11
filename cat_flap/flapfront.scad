@@ -146,6 +146,46 @@ module frontUnten() {
 }
 
 
+module connectorLinks () {
+    difference () {
+        union() {
+            // Wände
+            translate([0,0,0])
+            cube([10,20,frontWandstaerke]);
+
+            translate([0,0,-30])
+            cube([10,frontWandstaerke,30]);
+        }
+        // Frontlöcher für Verbindung
+        translate([5,10,0])
+        cylinder(frontWandstaerke*3,r=1.6);
+        rotate ([90,0,0])
+        translate([5,-15,-5])
+        cylinder(frontWandstaerke*3,r=1.6);
+    }
+} 
+
+module connectorRechts () {
+    difference () {
+        union() {
+            // Wände
+            translate([0,0,0])
+            cube([10,20,frontWandstaerke]);
+
+            translate([0,20-frontWandstaerke,-30])
+            cube([10,frontWandstaerke,30]);
+        }
+        // Frontlöcher für Verbindung
+        translate([5,10,0])
+        cylinder(frontWandstaerke*3,r=1.6);
+        rotate ([90,0,0])
+        translate([5,-15,-25])
+        cylinder(frontWandstaerke*3,r=1.6);
+   }
+}       
+/*
+
+// Oberer Teil der Front ohne Klappe
 difference() {
     
     // Frontoben
@@ -160,28 +200,37 @@ difference() {
     flap(flapBreite,flapHoehe,flapStaerke);
 
 }
-/*
-*/
 
+*/
+ 
+// unterer Teil der Front ohne Klappe
 translate([0,0,0])
+
+
 difference() {
-    
-    // Front unten
-    translate([frontHoehe-frontboxHoehe,0,0])
-    frontUnten();
+    union () {
+        // Front unten
+        translate([frontHoehe-frontboxHoehe,0,0])
+        frontUnten();
+        // Verbindungskante links
+        translate([frontHoehe-frontboxHoehe-10,frontWandstaerke,frontDicke-frontWandstaerke*2])
+        connectorLinks();
+        // Verbindungskante rechts
+        translate([frontHoehe-frontboxHoehe-10,frontBreite-20-frontWandstaerke,frontDicke-frontWandstaerke*2])
+        connectorRechts();
+
+    }   
     
     // Klappe vergrößert ausschneiden
     translate([frontRahmen-frontWandstaerke+1.5,frontRahmen-1.5,0])
     scale([1.02,1.01,1.0])flapCore(flapBreite,flapHoehe,frontDicke);
-/*    
-//  halbiert die Form
-    translate([0,frontBreite/2,0])
-    cube([frontHoehe,frontBreite/2,frontDicke]);
-*/
+   
 }
 
+/*
+*/
 
-
+/*
 // Flap in Front einpassen
 translate([frontRahmen+1,frontRahmen,frontDicke/2-flapStaerke/2])
 difference(){
@@ -192,9 +241,14 @@ difference(){
     flapCore(flapBreite-flapFrame,flapHoehe-flapFrame,flapHub);
 }
 
+*/
+
+/*
 // Antrieb in Gehäuse einsetzen
 translate([flapHoehe+frontRahmen+frontboxHoehe-frontWandstaerke,110,0])
 rotate([0,90,0])
 rotate([0,90,0])
 rotate([180,0,0])
 gearBox();
+
+*/
