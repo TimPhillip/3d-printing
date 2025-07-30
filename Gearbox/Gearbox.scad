@@ -1,0 +1,10 @@
+import("./MotorGear.STL");
+import("./M3Spacer16.5mmLong.STL");
+import("./GearSpacer4.5mm.STL");
+import("./GearSpacer1mm.STL");
+import("./both_gearbox_faces.STL");
+import("./BearingSpacer1.STL");
+import("./BearingSpacer2.STL");
+import("./Axle100mm.STL");
+import("./30to8Gear.STL");
+import("./30GearKeyed.STL");
